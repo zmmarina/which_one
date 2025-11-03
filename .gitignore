@@ -23,6 +23,17 @@
 hs_err_pid*
 replay_pid*
 
-# IntelliJ project files
+# Maven
+**/target/
+**/pom.properties
+*.log
+
+# Lista de arquivos temporários
+*.lst
+*.txt
+
+# IDE
 .idea/
+*.iml
+
 
