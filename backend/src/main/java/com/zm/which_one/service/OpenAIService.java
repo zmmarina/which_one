@@ -34,7 +34,7 @@ public class OpenAIService {
 
     public String askLLM(String userPrompt){
         Map<String, Object> body = Map.of(
-                "model", "gpt-4o",
+                "model", "gpt-4o-mini",
                 "messages", new Object[]{
                         SYSTEM_MESSAGE,
                         Map.of("role", "user", "content", userPrompt)
