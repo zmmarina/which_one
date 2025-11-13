@@ -2,7 +2,8 @@ package com.zm.which_one.model;
 
 import java.util.List;
 
-public record ChatResponse(List<Choice> choices) {
-    public record Choice(Message message) {}
-    public record Message(String role, String content) {}
+public record ChatResponse(List<Candidate> candidates) {
+    public record Candidate(Content content){}
+    public record Content(List<Part> parts){}
+    public record Part(String text){}
 }

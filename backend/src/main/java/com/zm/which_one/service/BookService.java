@@ -8,24 +8,30 @@ import org.springframework.stereotype.Service;
 public class BookService {
 
     private final ObjectMapper objectMapper;
-    private final OpenAIService openAIService;
+    private final GeminiService geminiService;
 
-    public BookService(ObjectMapper objectMapper, OpenAIService openAIService) {
+    public BookService(ObjectMapper objectMapper, GeminiService geminiService) {
         this.objectMapper = objectMapper;
-        this.openAIService = openAIService;
+        this.geminiService = geminiService;
     }
 
     public Book suggest(String preferences) {
         String prompt = createPrompt(preferences);
-        String llmReturn = openAIService.askLLM(prompt);
+        String llmReturn = geminiService.askLLM(prompt);
 
         return responseParse(llmReturn);
     }
 
     private String createPrompt(String preferences) {
         return """
-                You are an assistant that suggests romance books. 
+                You are an assistant that suggests romance books to users. 
                 The user said: %s
+                
+                Your task:
+                        - Detect automatically the language in which the user wrote.
+                        - Respond in the SAME language (title, summary, tags, everything).
+                        - Suggest ONE book that best matches the user's preferences.
+                        
                 Based on this, suggest a single book that best matches their preferences.
                 Important:
                     - Respond ONLY with a valid JSON object.
@@ -36,9 +42,10 @@ public class BookService {
                         "summary": "A brief summary of the story, 2-3 sentences max",
                         "storeLink": "A link to purchase the book on Amazon",
                         "tags": ["genre", "theme", "trope1", "trope2"]
-                }
-                Make sure:
+                    }
+               Requirements:
                 - The JSON is valid and parsable
+                - All text values (title, summary, tags) must be in the same language as the user input.
                 - Tags are short and descriptive
                 - Do not include any extra text outside the JSON
                 """.formatted(preferences);
@@ -47,9 +54,12 @@ public class BookService {
 
     private Book responseParse(String llmReturn) {
         try {
-            return objectMapper.readValue(llmReturn, Book.class);
+            String json = llmReturn
+                    .replaceAll("(?s).*?\\{", "{")
+                    .replaceAll("}[^}]*$", "}");
+            return objectMapper.readValue(json, Book.class);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to parse LLM response", e);
+            throw new RuntimeException("Failed to parse LLM response:" + llmReturn, e);
         }
     }
 
