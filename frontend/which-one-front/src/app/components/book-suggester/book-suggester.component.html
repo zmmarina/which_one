@@ -13,9 +13,8 @@
 
   <!-- Área de resultado -->
   <div *ngIf="book" class="result">
-    <h3>{{ 'RESULT_TITLE' | translate }}: {{ book.title }}</h3>
-
-    <p><strong>{{ 'RESULT_SUMMARY' | translate }}:</strong> {{ book.summary }}</p>
+    <h3>{{ 'RESULT_TITLE' | translate }}: {{ book?.title }}</h3>
+    <p><strong>{{ 'RESULT_SUMMARY' | translate }}:</strong> {{ book?.summary }}</p>
 
     <div>
       <strong>{{ 'RESULT_TAGS' | translate }}:</strong>
@@ -24,7 +23,7 @@
 
     <a
       *ngIf="book.storeLink"
-      [href]="book.storeLink"
+      [href]="book?.storeLink"
       target="_blank"
       rel="noopener noreferrer"
     >

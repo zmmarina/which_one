@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { FormsModule } from '@angular/forms';
 import { BookService } from '../../services/book.service';
 import { Book } from '../../models/book.model';
 
 @Component({
   selector: 'app-book-suggester',
+  standalone: true,
+  imports: [TranslateModule, FormsModule],
   templateUrl: './book-suggester.component.html',
   styleUrls: ['./book-suggester.component.css']
 })

@@ -1,13 +1,13 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-
+import { NgFor } from '@angular/common'; 
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, TranslateModule],
+  imports: [RouterOutlet, TranslateModule, NgFor],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css']
 })
 export class App {
 
@@ -25,7 +25,6 @@ export class App {
   constructor(private translate: TranslateService) {
 
     this.translate.addLangs(['en', 'pt', 'es', 'fr', 'hi', 'zh']);
-
     this.translate.setDefaultLang('en');
 
     const browserLang = navigator.language.split('-')[0];
@@ -36,7 +35,8 @@ export class App {
       this.translate.use('en');
     }
   }
-    changeLang(code: string) {
-    this.translate.use(code);
+    changeLang(event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    this.translate.use(selectElement.value);
   }
 }
