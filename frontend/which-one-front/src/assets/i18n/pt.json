@@ -1,0 +1,9 @@
+{
+  "TITLE": "Sugira um livro",
+  "PLACEHOLDER": "Diga o tipo de romance que você quer...",
+  "BUTTON_SUGGEST": "Sugerir Livro",
+  "RESULT_TITLE": "Título",
+  "RESULT_SUMMARY": "Resumo",
+  "RESULT_TAGS": "Tags",
+  "RESULT_STORE": "Comprar"
+}

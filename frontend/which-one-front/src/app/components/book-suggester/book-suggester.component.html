@@ -1,0 +1,34 @@
+<div class="book-suggester-container">
+  <h2>{{ 'TITLE' | translate }}</h2>
+
+  <input
+    type="text"
+    [(ngModel)]="preferences"
+    [placeholder]="'PLACEHOLDER' | translate"
+  />
+
+  <button (click)="onSuggest()" [disabled]="!preferences.trim()">
+    {{ 'BUTTON_SUGGEST' | translate }}
+  </button>
+
+  <!-- Área de resultado -->
+  <div *ngIf="book" class="result">
+    <h3>{{ 'RESULT_TITLE' | translate }}: {{ book.title }}</h3>
+
+    <p><strong>{{ 'RESULT_SUMMARY' | translate }}:</strong> {{ book.summary }}</p>
+
+    <div>
+      <strong>{{ 'RESULT_TAGS' | translate }}:</strong>
+      <span *ngFor="let t of book.tags">#{{ t }} </span>
+    </div>
+
+    <a
+      *ngIf="book.storeLink"
+      [href]="book.storeLink"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {{ 'RESULT_STORE' | translate }}
+    </a>
+  </div>
+</div>
