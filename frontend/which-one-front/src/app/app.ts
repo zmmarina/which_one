@@ -2,10 +2,16 @@ import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgFor } from '@angular/common'; 
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import { BookSuggesterComponent } from './components/book-suggester/book-suggester.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, TranslateModule, NgFor],
+  imports: [
+    RouterOutlet, 
+    TranslateModule, 
+    NgFor, 
+    BookSuggesterComponent
+  ],
   templateUrl: './app.html',
   styleUrls: ['./app.css']
 })
@@ -35,8 +41,7 @@ export class App {
       this.translate.use('en');
     }
   }
-    changeLang(event: Event) {
-    const selectElement = event.target as HTMLSelectElement;
-    this.translate.use(selectElement.value);
+    changeLang(lang: string) {
+    this.translate.use(lang);
   }
 }

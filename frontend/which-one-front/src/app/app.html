@@ -1,9 +1,13 @@
-<div class="lang-selector">
-  <select (change)="changeLang($event)">
-    <option *ngFor="let l of langs" [value]="l.code">
-      {{ l.label }}
-    </option>
-  </select>
+<div class="main-container">
+  <div class="lang-selector">
+    <select #langSel (change)="changeLang(langSel.value)">
+      <option *ngFor="let l of langs" [value]="l.code">
+        {{ l.label }}
+      </option>
+    </select>
+  </div>
+
+  <app-book-suggester></app-book-suggester>
 </div>
 
 <router-outlet></router-outlet>

@@ -18,6 +18,11 @@ export class BookSuggesterComponent {
 
   constructor(private bookService: BookService) {}
 
+  adjustHeight(el: HTMLTextAreaElement) {
+  el.style.height = "auto";
+  el.style.height = el.scrollHeight + "px";
+  }
+
   onSuggest() {
     if (!this.preferences.trim()) {
       return; 

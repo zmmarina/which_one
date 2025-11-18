@@ -1,17 +1,23 @@
 <div class="book-suggester-container">
   <h2>{{ 'TITLE' | translate }}</h2>
 
-  <input
-    type="text"
+  <textarea
+    rows="1"
     [(ngModel)]="preferences"
     [placeholder]="'PLACEHOLDER' | translate"
-  />
+    #autoResize
+    (input)="adjustHeight(autoResize)">
+  </textarea>
 
-  <button (click)="onSuggest()" [disabled]="!preferences.trim()">
+  <button
+    (click)="onSuggest()"
+    [disabled]="!preferences.trim()"
+    [class.active]="preferences.trim().length > 0"
+  >
     {{ 'BUTTON_SUGGEST' | translate }}
   </button>
 
-  <!-- Área de resultado -->
+  <!-- Response -->
   <div *ngIf="book" class="result">
     <h3>{{ 'RESULT_TITLE' | translate }}: {{ book?.title }}</h3>
     <p><strong>{{ 'RESULT_SUMMARY' | translate }}:</strong> {{ book?.summary }}</p>
