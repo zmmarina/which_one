@@ -11,16 +11,24 @@ import { Book } from '../../models/book.model';
   templateUrl: './book-suggester.component.html',
   styleUrls: ['./book-suggester.component.css']
 })
+
+
 export class BookSuggesterComponent {
+  maxChars = 500;
 
   preferences: string = "";
   book: Book | null = null;
 
   constructor(private bookService: BookService) {}
 
-  adjustHeight(el: HTMLTextAreaElement) {
-  el.style.height = "auto";
-  el.style.height = el.scrollHeight + "px";
+  adjustHeight(el: HTMLTextAreaElement) {    
+
+    if (this.preferences.length > this.maxChars){
+      this.preferences = this.preferences.substring(0, this.maxChars);
+    }
+
+    el.style.height = "auto";
+    el.style.height = el.scrollHeight + "px";
   }
 
   onSuggest() {

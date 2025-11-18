@@ -35,6 +35,16 @@ textarea:focus {
   border-color: #F8E8E8;
 }
 
+.char-counter {
+  text-align: right;
+  margin-top: -1px;
+  margin-bottom: 4px;
+  font-size: 0.85rem;
+  color: #8e7d7d;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
 /* Button */
 button {
   background-color: #F8E8E8;

@@ -8,6 +8,10 @@
     #autoResize
     (input)="adjustHeight(autoResize)">
   </textarea>
+  
+  <div class="char-counter">
+    {{ preferences.length }}/{{ maxChars }}
+  </div>
 
   <button
     (click)="onSuggest()"
