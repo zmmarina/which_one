@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BookService } from '../../services/book.service';
 import { Book } from '../../models/book.model';
@@ -7,7 +8,11 @@ import { Book } from '../../models/book.model';
 @Component({
   selector: 'app-book-suggester',
   standalone: true,
-  imports: [TranslateModule, FormsModule],
+  imports: [
+    TranslateModule, 
+    FormsModule,
+    CommonModule
+  ],
   templateUrl: './book-suggester.component.html',
   styleUrls: ['./book-suggester.component.css']
 })
@@ -19,7 +24,8 @@ export class BookSuggesterComponent {
   preferences: string = "";
   book: Book | null = null;
 
-  constructor(private bookService: BookService) {}
+  constructor(private bookService: BookService,
+    private cdr: ChangeDetectorRef) {}
 
   adjustHeight(el: HTMLTextAreaElement) {    
 
@@ -39,6 +45,7 @@ export class BookSuggesterComponent {
     this.bookService.suggestBook(this.preferences).subscribe({
       next: (result) => {
         this.book = result;
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error("Error trying to find the book:", err);

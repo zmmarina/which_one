@@ -72,31 +72,54 @@ button:hover:not([disabled]) {
 
 /* Result box */
 .result {
-  margin-top: 30px;
-  padding: 20px;
-  background-color: #F5F5F5;
-  border-radius: 15px;
+  margin-top: 40px;
+  padding: 28px;
+  background-color: #FFFFFF;
+  border-radius: 18px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .result h3 {
-  font-size: 1.4rem;
-  color: #F8E8E8;
-  margin-bottom: 10px;
+  font-size: 1.6rem;
+  color: #D9A4A4;
+  margin-bottom: 14px;
+  font-weight: 500;
 }
 
 .result p {
-  color: #666;
-  margin-bottom: 10px;
+  color: #58404a;
+  line-height: 1.5;
+  margin-bottom: 14px;
+  font-size: 1rem;
+}
+
+.result span {
+  background: #F8E8E8;
+  color: #A67D7D;
+  padding: 6px 10px;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  display: inline-block;
 }
 
 .result a {
-  color: #F8E8E8;
-  text-decoration: none;
+  display: block;
+  text-align: right;
+  margin-top: 16px;
+  color: #D9A4A4;
   font-weight: bold;
+  text-decoration: none;  
+  font-size: 1.05rem;
 }
 
 .result a:hover {
   text-decoration: underline;
+  color: #C48F8F;
 }
 
 /* Light scrollbar */

@@ -23,16 +23,15 @@
 
   <!-- Response -->
   <div *ngIf="book" class="result">
-    <h3>{{ 'RESULT_TITLE' | translate }}: {{ book?.title }}</h3>
-    <p><strong>{{ 'RESULT_SUMMARY' | translate }}:</strong> {{ book?.summary }}</p>
+    <h3>{{ book?.title }}</h3>
+    <p>{{ book?.summary }}</p>
 
     <div>
-      <strong>{{ 'RESULT_TAGS' | translate }}:</strong>
-      <span *ngFor="let t of book.tags">#{{ t }} </span>
+      <span *ngFor="let t of book?.tags">#{{ t }} </span>
     </div>
 
     <a
-      *ngIf="book.storeLink"
+      *ngIf="book?.storeLink"
       [href]="book?.storeLink"
       target="_blank"
       rel="noopener noreferrer"
