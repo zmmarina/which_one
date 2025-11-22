@@ -24,32 +24,41 @@ public class BookService {
 
     private String createPrompt(String preferences) {
         return """
-                You are an assistant that suggests romance books to users. 
-                The user said: %s
-                
-                Your task:
-                        - Detect automatically the language in which the user wrote.
-                        - Respond in the SAME language (title, summary, tags, everything).
-                        - Suggest ONE book that best matches the user's preferences.
-                        
-                Based on this, suggest a single book that best matches their preferences.
-                Important:
-                    - Respond ONLY with a valid JSON object.
-                    - Do NOT include any explanations, comments, or text outside the JSON.
-                    - The JSON must match exactly this structure:
-                    {
-                        "title": "The book title",
-                        "summary": "A brief summary of the story, 2-3 sentences max",
-                        "storeLink": "A link to purchase the book on Amazon",
-                        "tags": ["genre", "theme", "trope1", "trope2"]
-                    }
-               Requirements:
-                - The JSON is valid and parsable
-                - All text values (title, summary, tags) must be in the same language as the user input.
-                - Tags are short and descriptive
-                - Do not include any extra text outside the JSON
-                """.formatted(preferences);
+        You are an assistant that suggests romance books to users.
+        The user said: %s
+        
+        Your task:
+            - Detect automatically the language in which the user wrote.
+            - Respond in the SAME language (title, summary, tags, everything).
+            - Suggest ONE book that best matches the user's preferences.
+            
+        Based on this, suggest a single book that best matches their preferences.
+
+        Important:
+            - Respond ONLY with a valid JSON object.
+            - Do NOT include any explanations, comments, or text outside the JSON.
+            - Do NOT translate URLs.
+            - ALWAYS return a valid, working store link.
+            - The URL must not contain accents or translated text.
+            - Prefer Amazon US links (amazon.com) or the official purchase page.
+            - Do not guess URLs. Only return a URL if you are sure it exists.
+            - The JSON must match exactly this structure:
+            %%%%{
+                "title": "The book title",
+                "summary": "A brief summary of the story, 2-3 sentences max",
+                "storeLink": "A link to purchase the book on Amazon",
+                "tags": ["genre", "theme", "trope1", "trope2"]
+            %%%%}
+
+        Requirements:
+            - The JSON is valid and parsable
+            - All text values (title, summary, tags) must be in the same language as the user input.
+            - Tags are short and descriptive
+            - Do not include any extra text outside the JSON
+        """.formatted(preferences);
     }
+
+
 
 
     private Book responseParse(String llmReturn) {
